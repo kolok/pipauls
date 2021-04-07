@@ -1,0 +1,16 @@
+{% if latest_product_list %}
+<ul>
+    {% for product in latest_product_list %}
+    <li>
+        <ul>
+            <li><a href="/polls/{{ product.id }}/">{{ product.name }}</a></li>
+            <li>{{ product.description }}</li>
+            <li>{{ product.price }}</li>
+            <li>{{ product.created_at }}</li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No products are available.</p>
+{% endif %}
