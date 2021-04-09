@@ -1,0 +1,13 @@
+<h1>{{ product.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<ul>
+    <li>{{ product.description }}</li>
+    <li>{{ product.price }}</li>
+    <li>{{ product.created_at }}</li>
+</ul>
+
+<button type="button">
+    <a href="{% url 'pipaulsapi:edit' product.id %}">Edit your product</a>
+</button>
+
