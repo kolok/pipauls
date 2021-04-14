@@ -6,8 +6,13 @@ from .models import Product
 from .form import ProductForm
 
 def index(request):
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
     latest_product_list = Product.objects.order_by('-created_at')[:5]
-    context = {'latest_product_list': latest_product_list}
+    context = {
+        'latest_product_list': latest_product_list,
+        'num_visits': request.session['num_visits'],
+    }
     return render(request, 'pipaulsapi/index.html', context)
 
 def detail(request, product_id):

@@ -1,16 +1,25 @@
-{% if latest_product_list %}
-<ul>
-    {% for product in latest_product_list %}
-    <li>
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Pipauls - Product list</title>
+{% endblock %}
+
+{% block content %}
+    {% if latest_product_list %}
         <ul>
-            <li><a href="{% url 'pipaulsapi:detail' product.id %}">{{ product.name }}</a></li>
-            <li>{{ product.description }}</li>
-            <li>{{ product.price }}</li>
-            <li>{{ product.created_at }}</li>
+            {% for product in latest_product_list %}
+            <li>
+                <ul>
+                    <li><a href="{% url 'pipaulsapi:detail' product.id %}">{{ product.name }}</a></li>
+                    <li>{{ product.description }}</li>
+                    <li>{{ product.price }}</li>
+                    <li>{{ product.created_at }}</li>
+                </ul>
+            </li>
+            {% endfor %}
         </ul>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No products are available.</p>
-{% endif %}
+    {% else %}
+        <p>No products are available.</p>
+    {% endif %}
+    <p>Nombre de visite de cette page : {{num_visits}}</p>
+{% endblock %}
