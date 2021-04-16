@@ -10,7 +10,7 @@
             {% for product in latest_product_list %}
             <li>
                 <ul>
-                    <li><a href="{% url 'pipaulsapi:detail' product.id %}">{{ product.name }}</a></li>
+                    <li><a href="{% url 'exchange:detail' product.id %}">{{ product.name }}</a></li>
                     <li>{{ product.description }}</li>
                     <li>{{ product.price }}</li>
                     <li>{{ product.created_at }}</li>

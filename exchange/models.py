@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 
 class Product(models.Model):
+    class Meta:
+        permissions = (('can_edit_product', "create or update a product"),)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
     description = models.TextField()

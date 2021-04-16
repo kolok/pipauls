@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'pipaulsapi.apps.PipaulsapiConfig',
+    'exchange.apps.PipaulsapiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,6 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/pipaulsapi/'
+LOGIN_REDIRECT_URL = '/exchange/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
