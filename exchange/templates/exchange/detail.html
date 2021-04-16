@@ -7,12 +7,8 @@
     <li>{{ product.created_at }}</li>
 </ul>
 
-<button type="button">
-    <a href="{% url 'exchange:edit' product.id %}">Edit your product</a>
-</button>
-
 {% if perms.exchange.can_edit_product %}
 <button type="button">
-    <a href="{% url 'exchange:product_name' product.id %}">Edit your product name</a>
+    <a href="{% url 'exchange:edit' product.id %}">Edit your product</a>
 </button>
 {% endif %}
