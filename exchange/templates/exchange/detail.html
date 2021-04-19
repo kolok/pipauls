@@ -1,14 +1,21 @@
-<h1>{{ product.name }}</h1>
+{% extends "layout.html" %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<ul>
-    <li>{{ product.description }}</li>
-    <li>{{ product.price }}</li>
-    <li>{{ product.created_at }}</li>
-</ul>
+{% block content %}
+    <h1>{{ product.name }}</h1>
 
-{% if perms.exchange.can_edit_product %}
-<button type="button">
-    <a href="{% url 'exchange:edit' product.id %}">Edit your product</a>
-</button>
-{% endif %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <ul>
+        <li>{{ product.description }}</li>
+        <li>{{ product.price }}</li>
+        <li>{{ product.created_at }}</li>
+    </ul>
+
+    {% if perms.exchange.can_edit_product %}
+        <button type="button" class="btn btn-primary">
+            <a href="{% url 'exchange:edit' product.id %}">Edit your product</a>
+        </button>
+        <a type="button" class="btn btn-primary" href="{% url 'exchange:product-delete' product.id %}">
+            Delete product
+        </a>
+    {% endif %}
+{% endblock %}

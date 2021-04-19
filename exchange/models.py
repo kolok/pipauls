@@ -15,6 +15,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
     def was_created_recently(self):
         now = timezone.now()
         return now >= self.created_at >= now - datetime.timedelta(days=7)
+
+#    def get_absolute_url(self):
+#        return reverse('product-detail', args=[str(self.id)])

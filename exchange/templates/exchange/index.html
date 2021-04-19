@@ -21,5 +21,10 @@
     {% else %}
         <p>No products are available.</p>
     {% endif %}
-    <p>Nombre de visite de cette page : {{num_visits}}</p>
+    <p>Nombre de visite de cette page bolosse : {{num_visits}}</p>
+    {% if perms.exchange.can_edit_product %}
+    <button type="button">
+        <a href="{% url 'exchange:product-create' %}">Create product</a>
+    </button>
+    {% endif %}
 {% endblock %}

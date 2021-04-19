@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Product
 from .forms import ProductNameForm, ProductForm
@@ -47,3 +48,21 @@ def edit(request, product_id):
         'product': product_instance,
     }
     return render(request, 'exchange/edit.html', context)
+
+# Not use yet
+class ProductCreate(CreateView):
+    model = Product
+    fields = ['name', 'description', 'price']
+    def get_success_url(self):
+        return reverse('exchange:detail', kwargs={'product_id': self.object.pk})
+
+# Not use yet
+class ProductUpdate(UpdateView):
+    model = Product
+    #'__all__' # Not recommended (potential security issue if more fields added)
+    fields = ['name', 'description', 'price']
+
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = reverse_lazy('exchange:index')
+
