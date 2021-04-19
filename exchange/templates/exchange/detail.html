@@ -11,9 +11,9 @@
     </ul>
 
     {% if perms.exchange.can_edit_product %}
-        <button type="button" class="btn btn-primary">
-            <a href="{% url 'exchange:edit' product.id %}">Edit your product</a>
-        </button>
+        <a type="button" class="btn btn-primary" href="{% url 'exchange:product-update' product.id %}">
+            Edit your product
+        </a>
         <a type="button" class="btn btn-primary" href="{% url 'exchange:product-delete' product.id %}">
             Delete product
         </a>

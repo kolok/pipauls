@@ -8,6 +8,9 @@ from .models import Product
 from .forms import ProductNameForm, ProductForm
 
 def index(request):
+    return HttpResponseRedirect(reverse('exchange:product-list'))
+
+def product_list(request):
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
     latest_product_list = Product.objects.order_by('-created_at')[:5]
@@ -17,49 +20,16 @@ def index(request):
     }
     return render(request, 'exchange/index.html', context)
 
-def detail(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
     return render(request, 'exchange/detail.html', {'product': product})
 
-@login_required
-@permission_required('exchange.can_edit_product', raise_exception=True)
-def edit(request, product_id):
-    product_instance = get_object_or_404(Product, pk=product_id)
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = ProductForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            product = get_object_or_404(Product, pk=product_id)
-            product.name = form.cleaned_data['name']
-            product.description = form.cleaned_data['description']
-            product.price = form.cleaned_data['price']
-            product.save()
-            return HttpResponseRedirect(reverse('exchange:detail', args=(product.id,)))
-    else:
-        form = ProductForm(initial={
-            'name': product_instance.name,
-            'description': product_instance.description,
-            'price': product_instance.price,
-        })
-
-    context = {
-        'form': form,
-        'product': product_instance,
-    }
-    return render(request, 'exchange/edit.html', context)
-
-# Not use yet
 class ProductCreate(CreateView):
     model = Product
     fields = ['name', 'description', 'price']
-    def get_success_url(self):
-        return reverse('exchange:detail', kwargs={'product_id': self.object.pk})
 
-# Not use yet
 class ProductUpdate(UpdateView):
     model = Product
-    #'__all__' # Not recommended (potential security issue if more fields added)
     fields = ['name', 'description', 'price']
 
 class ProductDelete(DeleteView):

@@ -10,7 +10,7 @@
             {% for product in latest_product_list %}
             <li>
                 <ul>
-                    <li><a href="{% url 'exchange:detail' product.id %}">{{ product.name }}</a></li>
+                    <li><a href="{% url 'exchange:product-detail' product.id %}">{{ product.name }}</a></li>
                     <li>{{ product.description }}</li>
                     <li>{{ product.price }}</li>
                     <li>{{ product.created_at }}</li>
@@ -23,8 +23,8 @@
     {% endif %}
     <p>Nombre de visite de cette page bolosse : {{num_visits}}</p>
     {% if perms.exchange.can_edit_product %}
-    <button type="button">
-        <a href="{% url 'exchange:product-create' %}">Create product</a>
-    </button>
+        <a type="button" class="btn btn-primary" href="{% url 'exchange:product-create' %}">
+            Create product
+        </a>
     {% endif %}
 {% endblock %}

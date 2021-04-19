@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class Product(models.Model):
     class Meta:
@@ -19,6 +20,8 @@ class Product(models.Model):
     def was_created_recently(self):
         now = timezone.now()
         return now >= self.created_at >= now - datetime.timedelta(days=7)
+    def get_absolute_url(self):
+        return reverse('exchange:product-detail', args=[str(self.id)])
 
 #    def get_absolute_url(self):
-#        return reverse('product-detail', args=[str(self.id)])
+#        return reverse('product-detail', )
