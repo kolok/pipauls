@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'exchange.apps.PipaulsapiConfig',
+    'django_bootstrap_icons',
+    'exchange.apps.ExchangeConfig',
 ]
 
 MIDDLEWARE = [

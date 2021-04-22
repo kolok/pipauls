@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class PipaulsapiConfig(AppConfig):
+class ExchangeConfig(AppConfig):
     name = 'exchange'
