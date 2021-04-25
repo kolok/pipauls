@@ -1,14 +1,26 @@
 {% extends "layout.html" %}
 
+{% load static %}
+
 {% block content %}
     <h1>{{ product.name }}</h1>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <ul>
-        <li>{{ product.description }}</li>
-        <li>{{ product.price }}</li>
-        <li>{{ product.created_at }}</li>
-    </ul>
+    <div class="d-flex justify-content-left">
+        <div class="d-flex justify-content-center align-items-center"  style="padding:0px;width:204px;height:204px;border: solid 1px grey;">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" style="display: block;max-width:200px;max-height:200px;width: auto;height: auto;">
+            {% else %}
+                <img src="{% static 'exchange/images/pas-d-image-disponible.jpg' %}" alt=""  height="200">
+            {% endif %}
+        </div>
+        <div style="padding:10px;">
+            <p>Description : {{ product.description }}</p>
+            <p>Prix estimé : {{ product.price }}</p>
+            <p>Image : {{ product.price }}</p>
+            <p>Créé le : {{ product.created_at }}</p>
+        </div>
+    </div>
 
     {% if perms.exchange.can_edit_product %}
         <a type="button" class="btn btn-primary" href="{% url 'exchange:product-update' product.id %}">

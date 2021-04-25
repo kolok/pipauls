@@ -2,3 +2,4 @@
 .DS_Store
 pgdata
 pg-init-scripts
+media/

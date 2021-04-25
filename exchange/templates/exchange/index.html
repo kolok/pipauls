@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
     <title>Pipauls - Product list</title>
@@ -10,12 +11,29 @@
             <div class="row">
             {% for product in latest_product_list %}
                 <div class="col-12 col-md-6">
-                    <ul>
-                        <li><a href="{% url 'exchange:product-detail' product.id %}">{{ product.name }}</a></li>
-                        <li>{{ product.description }}</li>
-                        <li>{{ product.price }}</li>
-                        <li>{{ product.created_at }}</li>
-                    </ul>
+                    <div class="card" style="margin: 10px 0px 10px 0px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'exchange:product-detail' product.id %}">{{ product.name }}</a></h5>
+                            <div class="d-flex flex-row">
+                                {% if product.image %}
+                                    <div class="d-flex justify-content-center align-items-center"  style="padding:0px;width:140px;height:140px;">
+                                        <img src="{{ product.image.url }}" style="display: block;max-width:140px;max-height:140px;width: auto;height: auto;">
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <img src="{% static 'exchange/images/pas-d-image-disponible.jpg' %}" alt=""  height="140">
+                                    </div>
+                                {% endif %}
+                                <div style="padding:10px;">
+                                    <p>Description : {{ product.description }}</p>
+                                    <p>Prix estimé : {{ product.price }}</p>
+                                    <p>Image : {{ product.image }}</p>
+                                    <p>Créé le : {{ product.created_at }}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
             </div>

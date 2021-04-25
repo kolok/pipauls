@@ -7,11 +7,12 @@ from django.urls import reverse
 class Product(models.Model):
     class Meta:
         permissions = (('can_edit_product', "create or update a product"),)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField()
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    image = models.ImageField(upload_to='images/', blank=True)
+    name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
