@@ -11,12 +11,11 @@ def index(request):
     return HttpResponseRedirect(reverse('exchange:product-list'))
 
 def product_list(request):
-    num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits + 1
-    latest_product_list = Product.objects.order_by('-created_at')[:5]
+    latest_product_list = Product.objects.order_by('-created_at')[:10]
+    product_count = Product.objects.count()
     context = {
         'latest_product_list': latest_product_list,
-        'num_visits': request.session['num_visits'],
+        'product_count': product_count,
     }
     return render(request, 'exchange/index.html', context)
 
@@ -90,15 +89,6 @@ def product_create(request):
     }
 
     return render(request, 'exchange/product_form.html', context)
-
-
-class ProductCreate(CreateView):
-    model = Product
-    fields = ['name', 'description', 'price']
-
-class ProductUpdate(UpdateView):
-    model = Product
-    fields = ['name', 'description', 'price']
 
 class ProductDelete(DeleteView):
     model = Product

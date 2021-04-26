@@ -22,12 +22,14 @@
         </div>
     </div>
 
-    {% if perms.exchange.can_edit_product %}
-        <a type="button" class="btn btn-primary" href="{% url 'exchange:product-update' product.id %}">
-            Edit your product
-        </a>
-        <a type="button" class="btn btn-primary" href="{% url 'exchange:product-delete' product.id %}">
-            Delete product
-        </a>
-    {% endif %}
+    <div class="action-bar" style="margin: 20px 0px">
+        {% if perms.exchange.can_edit_product %}
+            <a type="button" class="btn btn-primary" href="{% url 'exchange:product-update' product.id %}">
+                Modifier ce savoir faire
+            </a>
+            <a type="button" class="btn btn-primary" href="{% url 'exchange:product-delete' product.id %}">
+                Supprimer ce savoir faire
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}

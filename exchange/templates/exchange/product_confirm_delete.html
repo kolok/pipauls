@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Delete Product</h1>
+<h1>Supprimer le produit <i>{{ product }}</i> ?</h1>
 
-    <p>Are you sure you want to delete the product: {{ product }}?</p>
+    <p>Etes vous sûr de vouloir supprimer ce produit ? Cette action est irréversible</p>
 
     <form action="" method="POST">
         {% csrf_token %}
-        <input type="submit" value="Yes, delete.">
+        <button class="btn btn-primary" type="submit">Oui, supprimer.</button>
+        <a href="{% url 'exchange:product-detail' product.id %}">Annuler</a>
     </form>
 {% endblock %}
