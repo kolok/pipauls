@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "bootstrap5",
+#    "bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,8 +83,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'pipauls',
         'NAME': 'pipauls',
-        'HOST': '127.0.0.1',
+        'HOST': 'postgres',
         'PASSWORD': 'pipauls',
+        'PORT': '5432',
         'TEST': {
             'NAME': 'pipauls-test',
         },
